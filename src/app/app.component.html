@@ -1,0 +1,18 @@
+<div class="tab">
+  <button
+    class="tablinks"
+    id="defaultOpen"
+    routerLink="search"
+    [routerLinkActive]="['active']"
+  >
+    TXN
+  </button>
+  <button class="tablinks" routerLink="otp" [routerLinkActive]="['active']">
+    OTP
+  </button>
+  <button class="tablinks" routerLink="logs" [routerLinkActive]="['active']">
+    Logs
+  </button>
+</div>
+
+<router-outlet></router-outlet>

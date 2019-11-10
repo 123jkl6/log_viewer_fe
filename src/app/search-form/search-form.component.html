@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="">
+    <form [formGroup]="searchLogsForm" (ngSubmit)="searchLogs()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col custom-control custom-radio">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="UAT1"
+              value="UAT1"
+              formControlName="envName"
+            />
+            <label class="custom-control-label" for="UAT1">UAT1</label>
+          </div>
+          <div class="col custom-control custom-radio">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="UAT2"
+              value="UAT2"
+              formControlName="envName"
+            />
+            <label class="custom-control-label" for="UAT2">UAT2</label>
+          </div>
+          <div class="col custom-control custom-radio">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="UAT3"
+              value="UAT3"
+              formControlName="envName"
+            />
+            <label class="custom-control-label" for="UAT3">UAT3</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="date">Date : </label>
+          <input
+            id="date"
+            type="date"
+            class="form-control"
+            formControlName="date"
+          />
+        </div>
+        <div class="col">
+          <label for="txnReferenceNumber">Transaction Ref No : </label>
+          <input
+            id="txnReferenceNumber"
+            type="text"
+            class="form-control"
+            formControlName="txnReferenceNumber"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col">
+          <label for="username">Username : </label>
+          <input
+            id="username"
+            type="text"
+            class="form-control"
+            formControlName="username"
+          />
+        </div>
+        <div class="col">
+          <label for="serviceName">Service Name : </label>
+          <select
+            class="custom-select"
+            id="serviceName"
+            formControlName="serviceName"
+          >
+            <option
+              *ngFor="let serviceName of serviceNames"
+              [value]="serviceName"
+              >{{ serviceName }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-8"></div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="results" class="table" *ngIf="results != null && results.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <td>Date</td>
+          <td>Time</td>
+          <td>Username</td>
+          <td>Service</td>
+          <td>Logs</td>
+          <td>Download</td>
+        </tr>
+      </thead>
+      <tr *ngFor="let result of results">
+        <td>Date</td>
+        <td>Time</td>
+        <td>Username</td>
+        <td>Service</td>
+        <td>
+          {{ result }}
+        </td>
+        <td>
+          <a href="javascript:;"> <i class="fa fa-download"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
