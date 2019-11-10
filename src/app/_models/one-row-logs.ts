@@ -5,4 +5,5 @@ export class OneRowLogs {
   serviceName: string;
   txnReferenceNumber: string;
   fileName: string;
+  resourceURI: string;
 }

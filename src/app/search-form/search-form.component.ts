@@ -74,7 +74,10 @@ export class SearchFormComponent implements OnInit {
       )
       .subscribe({
         next: data => {
-          this.results = this.sls.processLogs(data);
+          this.results = this.sls.processLogs(
+            data,
+            this.searchLogsForm.controls["envName"].value
+          );
           console.log(this.results);
         },
         error: err => {

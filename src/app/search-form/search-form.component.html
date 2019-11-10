@@ -112,7 +112,9 @@
           {{ result.fileName }}
         </td>
         <td>
-          <a href="javascript:;"> <i class="fa fa-download"></i></a>
+          <a href="{{ result.resourceURI }}" download="{{ result.fileName }}">
+            <i class="fa fa-download"></i
+          ></a>
         </td>
       </tr>
     </table>

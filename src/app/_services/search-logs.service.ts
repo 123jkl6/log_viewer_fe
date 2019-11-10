@@ -24,7 +24,7 @@ export class SearchLogsService {
     return this._http.post<string[]>(this.LOGS_URI + envName + "/search", slr);
   }
 
-  public processLogs(logsList: string[]): OneRowLogs[] {
+  public processLogs(logsList: string[], envName: string): OneRowLogs[] {
     return logsList.map(oneLogs => {
       let fileNameArr = oneLogs.split("_");
 
@@ -52,7 +52,8 @@ export class SearchLogsService {
         username: username,
         serviceName: serviceName,
         txnReferenceNumber: txnReferenceNumber,
-        fileName: oneLogs
+        fileName: oneLogs,
+        resourceURI: this.LOGS_URI + envName + "/" + oneLogs
       };
     });
   }
