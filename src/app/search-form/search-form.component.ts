@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 //import { DatePipe } from "@angular/common";
 
 import { SearchLogsService } from "../_services";
+import { OneRowLogs } from "../_models";
 
 @Component({
   selector: "app-search-form",
@@ -13,7 +14,7 @@ import { SearchLogsService } from "../_services";
 export class SearchFormComponent implements OnInit {
   searchLogsForm: FormGroup;
   serviceNames: string[] = ["login1FA", "login2FASMS"];
-  results: string[] = [];
+  results: OneRowLogs[] = [];
 
   constructor(
     private sls: SearchLogsService,
@@ -73,7 +74,7 @@ export class SearchFormComponent implements OnInit {
       )
       .subscribe({
         next: data => {
-          this.results = data;
+          this.results = this.sls.processLogs(data);
           console.log(this.results);
         },
         error: err => {

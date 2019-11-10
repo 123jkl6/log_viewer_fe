@@ -93,21 +93,23 @@
     <table>
       <thead>
         <tr>
-          <td>Date</td>
+          <td style="width:150px;">Date</td>
           <td>Time</td>
           <td>Username</td>
           <td>Service</td>
+          <td>Txn Ref No</td>
           <td>Logs</td>
           <td>Download</td>
         </tr>
       </thead>
       <tr *ngFor="let result of results">
-        <td>Date</td>
-        <td>Time</td>
-        <td>Username</td>
-        <td>Service</td>
+        <td>{{ result.date }}</td>
+        <td>{{ result.time }}</td>
+        <td>{{ result.username }}</td>
+        <td>{{ result.serviceName }}</td>
+        <td>{{ result.txnReferenceNumber }}</td>
         <td>
-          {{ result }}
+          {{ result.fileName }}
         </td>
         <td>
           <a href="javascript:;"> <i class="fa fa-download"></i></a>
