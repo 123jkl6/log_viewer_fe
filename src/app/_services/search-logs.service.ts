@@ -53,7 +53,8 @@ export class SearchLogsService {
         serviceName: serviceName,
         txnReferenceNumber: txnReferenceNumber,
         fileName: oneLogs,
-        resourceURI: this.LOGS_URI + envName + "/" + oneLogs
+        resourceURI: this.LOGS_URI + envName + "/" + oneLogs,
+        otp: null
       };
     });
   }

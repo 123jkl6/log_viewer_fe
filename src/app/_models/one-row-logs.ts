@@ -6,4 +6,5 @@ export class OneRowLogs {
   txnReferenceNumber: string;
   fileName: string;
   resourceURI: string;
+  otp: string;
 }

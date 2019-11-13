@@ -64,7 +64,8 @@ export class SearchFormComponent implements OnInit {
       txnReferenceNumber: this.searchLogsForm.controls["txnReferenceNumber"]
         .value,
       username: this.searchLogsForm.controls["username"].value,
-      serviceName: serviceName
+      serviceName: serviceName,
+      opaque: null
     };
     console.log(searchLogsRequest);
     this.sls

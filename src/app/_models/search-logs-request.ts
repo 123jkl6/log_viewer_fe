@@ -3,4 +3,5 @@ export class SearchLogsRequest {
   date: string;
   serviceName: string;
   username: string;
+  opaque: string;
 }
