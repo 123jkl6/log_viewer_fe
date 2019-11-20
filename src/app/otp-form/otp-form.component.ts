@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { OneRowLogs } from "../_models";
 import { SearchLogsService } from "../_services";
@@ -10,8 +10,7 @@ import { SearchLogsService } from "../_services";
   styleUrls: ["./otp-form.component.css"]
 })
 export class OtpFormComponent implements OnInit {
-  searchLogsForm: FormGroup;
-  serviceNames: string[] = ["login1FA", "login2FASMS"];
+  searchOTPForm: FormGroup;
   results: OneRowLogs[] = [];
 
   constructor(
@@ -20,71 +19,52 @@ export class OtpFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.searchLogsForm = this._formBuilder.group({
+    this.searchOTPForm = this._formBuilder.group({
       envName: "UAT1",
       date: null,
       username: null,
       opaque: null,
       txnReferenceNumber: null
     });
-
-    this.sls.getServiceNames().subscribe({
-      next: data => {
-        this.serviceNames = data;
-        this.serviceNames.splice(0, 0, "All");
-        console.log(this.serviceNames);
-      },
-      error: err => {
-        console.log(err);
-      },
-      complete: () => {
-        console.log("Retrived service names.");
-      }
-    });
   }
 
-  searchLogs() {
+  searchOtp() {
     console.log("Submit form.");
-    console.log(this.searchLogsForm.value);
+    console.log(this.searchOTPForm.value);
+    console.log("Form is valid :  " + !this.searchOTPForm.invalid);
 
-    //format date
-    //const format = "yyyy-MM-dd";
-    //const locale = "en-US";
-    //let pipe = new DatePipe("en-US");
+    if (!this.searchOTPForm.invalid) {
+      let serviceName = null;
 
-    let serviceName =
-      this.searchLogsForm.controls["serviceName"].value == "All"
-        ? null
-        : this.searchLogsForm.controls["serviceName"].value;
-
-    const searchLogsRequest = {
-      date: this.searchLogsForm.controls["date"].value,
-      txnReferenceNumber: this.searchLogsForm.controls["txnReferenceNumber"]
-        .value,
-      username: this.searchLogsForm.controls["username"].value,
-      serviceName: serviceName,
-      opaque: null
-    };
-    console.log(searchLogsRequest);
-    this.sls
-      .searchLogs(
-        searchLogsRequest,
-        this.searchLogsForm.controls["envName"].value
-      )
-      .subscribe({
-        next: data => {
-          this.results = this.sls.processLogs(
-            data,
-            this.searchLogsForm.controls["envName"].value
-          );
-          console.log(this.results);
-        },
-        error: err => {
-          console.log(err);
-        },
-        complete: () => {
-          console.log("Finished searching logs.");
-        }
-      });
+      const searchLogsRequest = {
+        date: this.searchOTPForm.controls["date"].value,
+        txnReferenceNumber: this.searchOTPForm.controls["txnReferenceNumber"]
+          .value,
+        username: this.searchOTPForm.controls["username"].value,
+        serviceName: serviceName,
+        opaque: this.searchOTPForm.controls["opaque"].value
+      };
+      console.log(searchLogsRequest);
+      this.sls
+        .searchOtp(
+          searchLogsRequest,
+          this.searchOTPForm.controls["envName"].value
+        )
+        .subscribe({
+          next: data => {
+            this.results = this.sls.processLogs(
+              data,
+              this.searchOTPForm.controls["envName"].value
+            );
+            console.log(this.results);
+          },
+          error: err => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log("Finished searching otp.");
+          }
+        });
+    }
   }
 }

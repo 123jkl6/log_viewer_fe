@@ -24,6 +24,12 @@ export class SearchLogsService {
     return this._http.post<string[]>(this.LOGS_URI + envName + "/search", slr);
   }
 
+  public searchOtp(slr: SearchLogsRequest, envName: string) {
+    console.log("service searchOtp : " + slr.date);
+    console.log("service searchOtp : " + envName);
+    return this._http.post<string[]>(this.LOGS_URI + envName + "/otp", slr);
+  }
+
   public processLogs(logsList: string[], envName: string): OneRowLogs[] {
     return logsList.map(oneLogs => {
       let fileNameArr = oneLogs.split("_");
