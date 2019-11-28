@@ -11,6 +11,7 @@ import { SearchLogsService } from "../_services";
 })
 export class OtpFormComponent implements OnInit {
   searchOTPForm: FormGroup;
+  showNoResultsModal: boolean = false;
   results: OneRowLogs[] = [];
 
   constructor(
@@ -52,6 +53,10 @@ export class OtpFormComponent implements OnInit {
         )
         .subscribe({
           next: data => {
+            if (data == null || data.length < 1) {
+              this.showNoResultsModal = true;
+              return;
+            }
             this.results = this.sls.processLogs(
               data,
               this.searchOTPForm.controls["envName"].value
@@ -66,5 +71,10 @@ export class OtpFormComponent implements OnInit {
           }
         });
     }
+  }
+
+  closeNoResultsModal() {
+    this.showNoResultsModal = false;
+    console.log("showNoResultsModal : " + this.showNoResultsModal);
   }
 }

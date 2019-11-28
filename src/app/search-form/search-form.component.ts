@@ -13,6 +13,7 @@ import { OneRowLogs } from "../_models";
 })
 export class SearchFormComponent implements OnInit {
   searchLogsForm: FormGroup;
+  showNoResultsModal: boolean = false;
   serviceNames: string[] = ["login1FA", "login2FASMS"];
   results: OneRowLogs[] = [];
 
@@ -75,6 +76,10 @@ export class SearchFormComponent implements OnInit {
       )
       .subscribe({
         next: data => {
+          if (data == null || data.length < 1) {
+            this.showNoResultsModal = true;
+            return;
+          }
           this.results = this.sls.processLogs(
             data,
             this.searchLogsForm.controls["envName"].value
@@ -88,5 +93,10 @@ export class SearchFormComponent implements OnInit {
           console.log("Finished searching logs.");
         }
       });
+  }
+
+  closeNoResultsModal() {
+    this.showNoResultsModal = false;
+    console.log("showNoResultsModal : " + this.showNoResultsModal);
   }
 }
