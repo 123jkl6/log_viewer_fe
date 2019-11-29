@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { HttpClient } from "@angular/common/http";
 
-import { SearchLogsRequest, OneRowLogs } from "../_models";
+import { SearchLogsRequest, OneRowLogs, OTPLogResponse } from "../_models";
 import { formatDate } from "@angular/common";
 
 @Injectable({
@@ -27,7 +27,10 @@ export class SearchLogsService {
   public searchOtp(slr: SearchLogsRequest, envName: string) {
     console.log("service searchOtp : " + slr.date);
     console.log("service searchOtp : " + envName);
-    return this._http.post<string[]>(this.LOGS_URI + envName + "/otp", slr);
+    return this._http.post<OTPLogResponse[]>(
+      this.LOGS_URI + envName + "/otp",
+      slr
+    );
   }
 
   public processLogs(logsList: string[], envName: string): OneRowLogs[] {
@@ -61,6 +64,46 @@ export class SearchLogsService {
         fileName: oneLogs,
         resourceURI: this.LOGS_URI + envName + "/" + oneLogs,
         otp: null
+      };
+    });
+  }
+
+  public processOTPLogs(
+    logsList: OTPLogResponse[],
+    envName: string
+  ): OneRowLogs[] {
+    return logsList.map(oneLogs => {
+      let fileName = oneLogs.otpFileName;
+      let otp = oneLogs.otp;
+      let fileNameArr = fileName.split("_");
+
+      let dateTimeArr = fileNameArr[0].split("T");
+      let time = dateTimeArr[1];
+      let date =
+        dateTimeArr[0].slice(0, 4) +
+        "/" +
+        dateTimeArr[0].slice(4, 6) +
+        "/" +
+        dateTimeArr[0].slice(6, 8);
+      //let date = dateTimeArr[0];
+      let username = "";
+      if (fileNameArr.length == 4) {
+        username = fileNameArr[2];
+      }
+      //in Javascript, splitting by just a dot is ok.
+      let serviceName = fileNameArr[fileNameArr.length - 1].split(".")[0];
+
+      let txnReferenceNumber = fileNameArr[1];
+
+      return {
+        date: date,
+        time: time,
+        username: username,
+        serviceName: serviceName,
+        txnReferenceNumber: txnReferenceNumber,
+        fileName: fileName,
+        resourceURI: this.LOGS_URI + envName + "/" + fileName,
+        otp: otp
       };
     });
   }

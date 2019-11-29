@@ -57,7 +57,7 @@ export class OtpFormComponent implements OnInit {
               this.showNoResultsModal = true;
               return;
             }
-            this.results = this.sls.processLogs(
+            this.results = this.sls.processOTPLogs(
               data,
               this.searchOTPForm.controls["envName"].value
             );
