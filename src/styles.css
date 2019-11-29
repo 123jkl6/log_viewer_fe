@@ -40,6 +40,10 @@
   border-top: none;
 }
 
+.link:hover {
+  cursor: pointer;
+}
+
 .no-results-modal {
   position: absolute;
   top: 0px;

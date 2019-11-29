@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { SearchLogsRequest, OneRowLogs, OTPLogResponse } from "../_models";
 import { formatDate } from "@angular/common";
@@ -105,6 +105,13 @@ export class SearchLogsService {
         resourceURI: this.LOGS_URI + envName + "/" + fileName,
         otp: otp
       };
+    });
+  }
+
+  getSingleLogs(resourceURI: string) {
+    return this._http.get(resourceURI, {
+      observe: "body",
+      responseType: "text"
     });
   }
 }

@@ -100,6 +100,7 @@
           <td>Txn Ref No</td>
           <td>Logs</td>
           <td>Download</td>
+          <td>View</td>
         </tr>
       </thead>
       <tr *ngFor="let result of results">
@@ -112,9 +113,14 @@
           {{ result.fileName }}
         </td>
         <td>
-          <a href="{{ result.resourceURI }}" download="{{ result.fileName }}">
+          <a (click)="downloadLogs(result.resourceURI,result.fileName)">
             <i class="fa fa-download"></i
           ></a>
+        </td>
+        <td>
+          <a (click)="goToLink(result.resourceURI)" class="link">
+            <i class="fa fa-external-link"></i>
+          </a>
         </td>
       </tr>
     </table>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
+
+import * as fileSaver from "file-saver";
+
 //import { formatDate } from "@angular/common";
 //import { DatePipe } from "@angular/common";
 
@@ -95,8 +98,29 @@ export class SearchFormComponent implements OnInit {
       });
   }
 
+  downloadLogs(resourceURI: string, fileName: string) {
+    this.sls.getSingleLogs(resourceURI).subscribe({
+      next: logsFile => {
+        let blob: any = new Blob([logsFile], {
+          type: "text/plain; charset=utf-8"
+        });
+        fileSaver.saveAs(blob, fileName);
+      },
+      error: err => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log("No more data download");
+      }
+    });
+  }
+
   closeNoResultsModal() {
     this.showNoResultsModal = false;
     console.log("showNoResultsModal : " + this.showNoResultsModal);
+  }
+
+  goToLink(link: string) {
+    window.open(link, "_blank");
   }
 }
