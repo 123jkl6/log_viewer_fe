@@ -109,7 +109,7 @@ export class SearchLogsService {
   }
 
   getSingleLogs(resourceURI: string) {
-    return this._http.get(resourceURI, {
+    return this._http.get (resourceURI, {
       observe: "body",
       responseType: "text"
     });

@@ -113,7 +113,7 @@
           {{ result.fileName }}
         </td>
         <td>
-          <a (click)="downloadLogs(result.resourceURI,result.fileName)">
+          <a (click)="downloadLogs(result.resourceURI, result.fileName)">
             <i class="fa fa-download"></i
           ></a>
         </td>
@@ -134,8 +134,13 @@
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  id="noResultsModal"
 >
-  <div class="modal-dialog" role="document">
+  <div
+    class="modal-dialog show-modal-dialog"
+    id="noResultsModalDialog"
+    role="document"
+  >
     <div class="modal-content">
       <div class="modal-header">
         <button

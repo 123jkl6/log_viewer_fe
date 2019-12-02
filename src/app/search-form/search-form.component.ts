@@ -81,6 +81,17 @@ export class SearchFormComponent implements OnInit {
         next: data => {
           if (data == null || data.length < 1) {
             this.showNoResultsModal = true;
+            document
+              .getElementsByTagName("body")[0]
+              .classList.add("modal-open");
+            setTimeout(() => {
+              document
+                .getElementById("noResultsModal")
+                .classList.add("show-modal");
+              // document
+              //   .getElementById("noResultsModalDialog")
+              //   .classList.add("show-modal-dialog");
+            }, 50);
             return;
           }
           this.results = this.sls.processLogs(
@@ -116,8 +127,17 @@ export class SearchFormComponent implements OnInit {
   }
 
   closeNoResultsModal() {
-    this.showNoResultsModal = false;
-    console.log("showNoResultsModal : " + this.showNoResultsModal);
+    document
+      .getElementById("noResultsModalDialog")
+      .classList.add("close-modal-dialog");
+    setTimeout(() => {
+      this.showNoResultsModal = false;
+      document.getElementsByTagName("body")[0].classList.remove("modal-open");
+      document
+        .getElementById("noResultsModalDialog")
+        .classList.add("close-modal-dialog");
+      console.log("showNoResultsModal : " + this.showNoResultsModal);
+    }, 100);
   }
 
   goToLink(link: string) {

@@ -45,12 +45,46 @@
 }
 
 .no-results-modal {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   height: 100%;
   width: 100%;
   background-color: rgb(102, 102, 102, 0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.15s, top 0.15s;
+  -moz-transition: opacity 0.15s, top 0.15s;
+  -ms-transition: opacity 0.15s, top 0.15s;
+  -o-transition: opacity 0.15s, top 0.15s;
+  transition: opacity 0.15s, top 0.15s;
+}
+
+.show-modal {
+  opacity: 1;
+}
+
+.show-modal-dialog {
+  animation: fadeIn 0.3s forwards;
+}
+
+.close-modal-dialog {
+  animation: fadeOut 0.15s forwards;
+}
+
+@keyframes fadeIn {
+  100% {
+    transform: translateY(50%);
+  }
+}
+
+@keyframes fadeOut {
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 html,
