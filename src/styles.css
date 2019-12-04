@@ -48,6 +48,10 @@
   cursor: pointer;
 }
 
+.form-container {
+  margin-top: 5%;
+}
+
 .no-results-modal {
   position: fixed;
   top: 0px;
