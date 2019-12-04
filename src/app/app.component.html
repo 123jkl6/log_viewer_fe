@@ -2,17 +2,29 @@
   <button
     class="tablinks"
     id="defaultOpen"
-    routerLink="search"
-    [routerLinkActive]="['active']"
+    (click)="switchComponent(0)"
+    [ngClass]="{ active: showComponentIdx == 0 }"
   >
     TXN
   </button>
-  <button class="tablinks" routerLink="otp" [routerLinkActive]="['active']">
+  <button
+    class="tablinks"
+    (click)="switchComponent(1)"
+    [ngClass]="{ active: showComponentIdx == 1 }"
+  >
     OTP
   </button>
-  <button class="tablinks" routerLink="logs" [routerLinkActive]="['active']">
+  <button
+    class="tablinks"
+    (click)="switchComponent(2)"
+    [ngClass]="{ active: showComponentIdx == 2 }"
+  >
     Logs
   </button>
 </div>
 
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->
+
+<app-search-form [hidden]="showComponentIdx != 0"></app-search-form>
+<app-otp-form [hidden]="showComponentIdx != 1"></app-otp-form>
+<app-logs-form [hidden]="showComponentIdx != 2"></app-logs-form>

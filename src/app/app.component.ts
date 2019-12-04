@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'log-viewer-fe';
+  title = "log-viewer-fe";
+  showComponentIdx = 0;
+
+  switchComponent(idx) {
+    this.showComponentIdx = idx;
+  }
 }

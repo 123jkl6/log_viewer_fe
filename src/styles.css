@@ -40,6 +40,10 @@
   border-top: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .link:hover {
   cursor: pointer;
 }

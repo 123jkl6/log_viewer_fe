@@ -5,10 +5,10 @@ import { SearchFormComponent } from "./search-form";
 import { OtpFormComponent } from "./otp-form";
 import { LogsFormComponent } from "./logs-form";
 const routes: Routes = [
-  { path: "", redirectTo: "/search", pathMatch: "full" },
-  { path: "search", component: SearchFormComponent },
-  { path: "otp", component: OtpFormComponent },
-  { path: "logs", component: LogsFormComponent }
+  // { path: "", redirectTo: "/search", pathMatch: "full" },
+  // { path: "search", component: SearchFormComponent },
+  // { path: "otp", component: OtpFormComponent },
+  // { path: "logs", component: LogsFormComponent }
 ];
 
 @NgModule({
